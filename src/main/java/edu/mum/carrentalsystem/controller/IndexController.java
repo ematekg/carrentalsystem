@@ -6,8 +6,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class IndexController {
 
-    @RequestMapping("/index")
+    @RequestMapping("/home")
     public String index(){
-        return "index";
+        return "home";
+    }
+
+    @RequestMapping("/catagory")
+    public String catagory(){
+        return "catagory";
     }
 }
