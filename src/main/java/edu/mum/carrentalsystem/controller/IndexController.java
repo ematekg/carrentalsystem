@@ -11,8 +11,8 @@ public class IndexController {
         return "home";
     }
 
-    @RequestMapping("/catagory")
+    @RequestMapping("vehicle/catagory")
     public String catagory(){
-        return "catagory";
+        return "vehicle/catagory";
     }
 }
