@@ -1,6 +1,7 @@
 package edu.mum.carrentalsystem.model.user;
 
-import com.mum.vehiclerentalsystem.model.IUser;
+
+import edu.mum.carrentalsystem.model.IUser;
 
 public class User implements IUser {
 }

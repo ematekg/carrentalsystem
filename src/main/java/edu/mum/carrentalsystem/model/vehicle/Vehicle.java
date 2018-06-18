@@ -1,6 +1,7 @@
 package edu.mum.carrentalsystem.model.vehicle;
 
-import com.mum.vehiclerentalsystem.model.IVehicle;
+
+import edu.mum.carrentalsystem.model.IVehicle;
 
 public class Vehicle implements IVehicle {
 }

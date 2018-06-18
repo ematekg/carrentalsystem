@@ -1,6 +1,11 @@
 package edu.mum.carrentalsystem.model.user;
 
-import com.mum.vehiclerentalsystem.model.ICredential;
+
+import edu.mum.carrentalsystem.model.ICredential;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 @Entity
 public class Credential implements ICredential {

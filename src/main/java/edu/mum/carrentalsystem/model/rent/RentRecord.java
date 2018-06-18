@@ -1,6 +1,7 @@
 package edu.mum.carrentalsystem.model.rent;
 
-import com.mum.vehiclerentalsystem.model.IRentRecord;
+
+import edu.mum.carrentalsystem.model.IRentRecord;
 
 public class RentRecord implements IRentRecord {
 }
