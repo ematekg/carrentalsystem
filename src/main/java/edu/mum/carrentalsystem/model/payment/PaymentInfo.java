@@ -11,11 +11,11 @@ public class PaymentInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    private long cardNumber;
+    private String  cardNumber;
     private LocalDate expireDate;
     private int cvv;
 
-    public PaymentInfo(long cardNumber, LocalDate expireDate, int cvv) {
+    public PaymentInfo(String cardNumber, LocalDate expireDate, int cvv) {
         this.cardNumber = cardNumber;
         this.expireDate = expireDate;
         this.cvv = cvv;
@@ -32,11 +32,11 @@ public class PaymentInfo {
         this.id = id;
     }
 
-    public long getCardNumber() {
+    public String getCardNumber() {
         return cardNumber;
     }
 
-    public void setCardNumber(long cardNumber) {
+    public void setCardNumber(String cardNumber) {
         this.cardNumber = cardNumber;
     }
 

@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-public class VehicleCatagory {
+public class VehicleCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private  long id;
@@ -13,12 +13,12 @@ public class VehicleCatagory {
     @OneToMany(mappedBy = "category")
     private List<Vehicle> vehicleList;
 
-    public VehicleCatagory(String name, String description) {
+    public VehicleCategory(String name, String description) {
         this.name = name;
         this.description = description;
     }
 
-    public VehicleCatagory() {
+    public VehicleCategory() {
     }
 
     public String getName() {
