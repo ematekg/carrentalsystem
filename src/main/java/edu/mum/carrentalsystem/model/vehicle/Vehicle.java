@@ -11,18 +11,20 @@ public class Vehicle {
     private String model;
     private String make;
     private String year;
+    private String url;
     @ManyToOne
     @JoinColumn(name = "category_id")
     private VehicleCatagory category;
     private String description;
 
 
-    public Vehicle(String model, String make, String year, VehicleCatagory category, String description) {
+    public Vehicle(String model, String make, String year,String url, VehicleCatagory category, String description) {
         this.model = model;
         this.make = make;
         this.year = year;
         this.category = category;
         this.description = description;
+        this.url=url;
     }
 
     public Vehicle() {
@@ -58,6 +60,14 @@ public class Vehicle {
 
     public void setYear(String year) {
         this.year = year;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public VehicleCatagory getCategory() {
