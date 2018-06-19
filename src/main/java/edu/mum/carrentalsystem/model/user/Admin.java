@@ -1,17 +1,26 @@
 package edu.mum.carrentalsystem.model.user;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Admin extends User {
+    @OneToOne
+    @JoinColumn(name = "credential_id")
+    protected Credential credential;
 
-    public Admin(String firstName, String lastName, Credential credential, Address address) {
-        super(firstName, lastName, credential, address);
+    public Admin(String fullName, Address address, Credential credential) {
+        super(fullName, address);
+        this.credential = credential;
     }
 
     public Admin() {
+    }
+
+    public Credential getCredential() {
+        return credential;
+    }
+
+    public void setCredential(Credential credential) {
+        this.credential = credential;
     }
 }

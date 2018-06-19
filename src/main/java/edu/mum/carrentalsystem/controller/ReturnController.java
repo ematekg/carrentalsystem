@@ -2,7 +2,7 @@ package edu.mum.carrentalsystem.controller;
 
 import edu.mum.carrentalsystem.model.user.*;
 import edu.mum.carrentalsystem.model.vehicle.Vehicle;
-import edu.mum.carrentalsystem.model.vehicle.VehicleCatagory;
+
 import edu.mum.carrentalsystem.service.vehicleHandler.IVehicleDetailHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,7 +29,7 @@ public class ReturnController {
         credential.setRole(Role.ADMIN);
 
         Address address=new Address("100 N 4th street","fairfield","IOwa",52557);
-        user=new Admin("John","Doe",credential,address);
+        user=new Admin("John Doe",address ,credential);
 
     }
 
@@ -52,8 +52,7 @@ public class ReturnController {
     public String loginSubmit(@ModelAttribute("credential") Credential credential)
     {
         credential.setRole(Role.ADMIN);
-
-        Credential credInDb=user.getCredential();
+        Credential credInDb=((Admin)user).getCredential();
         if(credInDb.equals(credential)){
             return "redirect:/welcome";
         }

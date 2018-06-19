@@ -9,22 +9,30 @@ import java.util.List;
 @Entity
 public class Customer extends User {
 
+    private  String email;
+
     @OneToOne
     @JoinColumn(name = "payment_id")
     private PaymentInfo paymentInfo;
     @OneToMany(mappedBy = "customer")
     private List<RentRecord> rentrecord;
 
-
-    public Customer(String firstName, String lastName, Credential credential, Address address, PaymentInfo paymentInfo) {
-        super(firstName, lastName, credential, address);
+    public Customer(String fullName, Address address, String email, PaymentInfo paymentInfo) {
+        super(fullName, address);
+        this.email = email;
         this.paymentInfo = paymentInfo;
     }
-
     public Customer() {
     }
 
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     public PaymentInfo getPaymentInfo() {
         return paymentInfo;
@@ -38,12 +46,14 @@ public class Customer extends User {
         return rentrecord;
     }
 
+    public void setRentrecord(List<RentRecord> rentrecord) {
+        this.rentrecord = rentrecord;
+    }
+
+
+
     public void addRentRecord(RentRecord rentrecord) {
         this.rentrecord.add(rentrecord);
         rentrecord.setCustomer(this);
-    }
-
-    public void setRentrecord(List<RentRecord> rentrecord) {
-        this.rentrecord = rentrecord;
     }
 }
