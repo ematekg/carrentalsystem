@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import java.util.List;
 
 @Controller
+@RequestMapping("/")
 public class IndexController {
 
     @Autowired
@@ -37,14 +38,16 @@ public class IndexController {
     public String viewAllCarList(Model model) {
         List<Vehicle> vehicleList = categoryHandler.getAllVehicles();
         model.addAttribute("allvehicles", vehicleList);
-        return "/vehicle/carlist";
+        return "vehicle/carlist";
     }
 
 
     @RequestMapping(value = "/carlist/{vehicleCategory}", method = RequestMethod.GET)
     public String viewCarsOnCategory(VehicleCategory vehicleCategory, Model model) {
         List<Vehicle> vehicleList = categoryHandler.getVehiclesByCategory(vehicleCategory);
+        System.out.println(vehicleList);
         model.addAttribute("vehiclelist", vehicleList);
-        return null;
+        return "vehicle/carlist";
     }
+
 }

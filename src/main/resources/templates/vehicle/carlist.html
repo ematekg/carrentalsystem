@@ -23,27 +23,36 @@
         <small>Life is too short...</small>
     </h1>
 
-    <!-- Project One -->
-    <div class="row">
-        <div class="col-md-7">
-            <a href="#">
-                <img class="img-fluid rounded mb-3 mb-md-0" src="https://www.alux.com/wp-content/uploads/2014/03/mercedes_benz_biome_concept_4-650x300.jpg" alt="">
-            </a>
-        </div>
-        <div class="col-md-5">
-            <h3>Car Name</h3>
-            <p>Car description, consectetur adipisicing elit.unde repudiandae voluptatum sit ab debitis suscipit fugiat
-                natus velit excepturi amet commodi deleniti
-                alias possimus!</p>
-            <ul class="list-group">
-                <li class="list-group-item">Make</li>
-                <li class="list-group-item">Model</li>
-                <li class="list-group-item">year</li>
-            </ul>
-            <a class="btn btn-primary" href="#">View Project</a>
-        </div>
-    </div>
-    <hr>
+    <!-- Car One -->
+    <th:block>
+        <table class="table table-striped">
+            <tbody>
+            <tr th:each="vehicle : ${allvehicles}">
+                <div class="row">
+                    <div class="col-md-7">
+                        <a href="#">
+                            <img class="img-fluid rounded mb-3 mb-md-0"
+                                 src="https://www.alux.com/wp-content/uploads/2014/03/mercedes_benz_biome_concept_4-650x300.jpg"
+                                 alt="">
+                        </a>
+                    </div>
+                    <div class="col-md-5">
+                        <h3>Car Name</h3>
+                        <p>Car description, consectetur adipisicing elit.unde repudiandae voluptatum sit ab debitis
+                            suscipit fugiat
+                            natus velit excepturi amet commodi deleniti
+                            alias possimus!</p>
+                        <ul class="list-group">
+                            <li class="list-group-item">Make</li>
+                            <li class="list-group-item">Model</li>
+                            <li class="list-group-item">year</li>
+                        </ul>
+                        <a class="btn btn-primary" href="/rent/checkout">View Project</a>
+                    </div>
+                </div>
+            </tbody>
+        </table>
+    </th:block>
 </div>
 <!-- /.container -->
 
