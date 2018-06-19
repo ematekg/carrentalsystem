@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/admin/shared::header">
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+</head>
+<body>
+<nav th:replace="/home/shared::nav"></nav>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Model</th>
+        <th scope="col">No of Passengers</th>
+        <th scope="col">Type</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="vehcile:${vehicles}">
+
+        <td th:text="${vehcile.getId()}"></td>
+        <td th:text="${vehcile.getModel()}"></td>
+        <td th:text="${vehcile.getNoOfPassengers()}"></td>
+        <td th:text="${vehcile.getType()}"></td>
+        <td>
+            <a class="btn btn-danger" th:href="@{'/edit/' + ${vehcile.getId()}}">Edit</a>&nbsp;
+            <a class="btn btn-danger" th:href="@{'/delete/' + ${vehcile.getId()}}">Delete</a>
+
+        </td>
+    </tr>
+
+    </tbody>
+</table>
+<a class="btn btn-primary" th:href="@{/add}">Add New</a>
+<div th:replace="/home/shared::footer"></div>
+
+</body>
+</html>
