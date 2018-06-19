@@ -14,6 +14,8 @@ public class CategoryHandler {
     @Autowired
     IVehicleRepository vehicleRepository;
 
+
+
     public List<Vehicle> getAllVehicles() {
        return vehicleRepository.findAll();
     }

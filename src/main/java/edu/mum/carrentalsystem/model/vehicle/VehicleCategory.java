@@ -10,15 +10,26 @@ public class VehicleCategory {
     private  long id;
     private String name;
     private String description;
+    private String catImg_url;
+
     @OneToMany(mappedBy = "category")
     private List<Vehicle> vehicleList;
 
-    public VehicleCategory(String name, String description) {
+    public VehicleCategory(String name, String description, String catImg_url) {
         this.name = name;
         this.description = description;
+        this.catImg_url = catImg_url;
     }
 
     public VehicleCategory() {
+    }
+
+    public String getCatImgUrl() {
+        return catImg_url;
+    }
+
+    public void setCatImgUrl(String catImg_url) {
+        this.catImg_url = catImg_url;
     }
 
     public String getName() {
