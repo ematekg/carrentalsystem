@@ -18,12 +18,11 @@ public class Vehicle {
     private String description;
 
 
-    public Vehicle(String model, String make, String year,String url, VehicleCatagory category, String description) {
+    public Vehicle(String model, String make, String year,String url, String description) {
         this.model = model;
         this.make = make;
         this.year = year;
-        this.category = category;
-        this.description = description;
+         this.description = description;
         this.url=url;
     }
 
