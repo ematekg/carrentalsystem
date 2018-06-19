@@ -16,4 +16,9 @@ public class IndexController {
     public String catagory(){
         return "/vehicle/catagory";
     }
+
+    @RequestMapping(value = "/carlist", method = RequestMethod.GET)
+    public String carList(){
+        return "/vehicle/carlist";
+    }
 }
