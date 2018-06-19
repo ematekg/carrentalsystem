@@ -12,13 +12,21 @@ public class VehicleCatagory {
     private String description;
     @OneToMany(mappedBy = "category")
     private List<Vehicle> vehicleList;
-
-    public VehicleCatagory(String name, String description) {
+  private  String catImg_url;
+    public VehicleCatagory(String name, String description,String catImg_url;) {
         this.name = name;
         this.description = description;
     }
 
     public VehicleCatagory() {
+    }
+
+    public void setCatImg_url(String catImg_url) {
+        this.catImg_url = catImg_url;
+    }
+
+    public String getCatImg_url() {
+        return catImg_url;
     }
 
     public String getName() {

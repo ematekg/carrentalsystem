@@ -1,6 +1,7 @@
 package edu.mum.carrentalsystem.model.user;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 public class Credential {
@@ -12,13 +13,28 @@ public class Credential {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    public Credential(String username, String password, Role role) {
+    public Credential(String username, String password) {
         this.username = username;
         this.password = password;
-        this.role = role;
-    }
+        }
 
     public Credential() {
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Credential that = (Credential) o;
+        return Objects.equals(username, that.username) &&
+                Objects.equals(password, that.password) &&
+                role == that.role;
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(username, password, role);
     }
 
     public Long getId() {

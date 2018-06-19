@@ -8,5 +8,10 @@ import javax.persistence.Id;
 @Entity
 public class Admin extends User {
 
+    public Admin(String firstName, String lastName, Credential credential, Address address) {
+        super(firstName, lastName, credential, address);
+    }
 
+    public Admin() {
+    }
 }

@@ -2,15 +2,25 @@ package edu.mum.carrentalsystem.model.vehicle;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Vehicle {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+    @NotNull
+    @Min(value = 1,message = "please enter a valid model")
     private String model;
+    @NotNull
+    @Min(value = 1,message = "please enter a valid Make")
     private String make;
+    @NotNull
+    @Min(value = 4,message = "please enter a valid Manufacture Year")
     private String year;
+    @NotNull
+    @Min(value = 3,message = "please enter a valid url")
     private String url;
     @ManyToOne
     @JoinColumn(name = "category_id")
