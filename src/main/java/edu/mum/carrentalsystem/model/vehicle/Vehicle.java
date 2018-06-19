@@ -24,7 +24,7 @@ public class Vehicle {
     private String url;
     @ManyToOne
     @JoinColumn(name = "category_id")
-    private VehicleCatagory category;
+    private VehicleCategory category;
     private String description;
 
 
@@ -79,11 +79,11 @@ public class Vehicle {
         this.url = url;
     }
 
-    public VehicleCatagory getCategory() {
+    public VehicleCategory getCategory() {
         return category;
     }
 
-    public void setCategory(VehicleCatagory category) {
+    public void setCategory(VehicleCategory category) {
         this.category = category;
     }
 
