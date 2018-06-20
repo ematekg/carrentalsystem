@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/admin/shared::header">
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+</head>
+<body>
+<nav th:replace="/admin/shared::nav"></nav>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Full Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">State</th>
+        <th scope="col">City</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="customer:${customers}">
+
+        <td th:text="${customer.getUserId()}"></td>
+        <td th:text="${customer.getFullName()}"></td>
+        <td th:text="${customer.getEmail()}"></td>
+        <td th:text="${customer.getAddress().getState()}"></td>
+        <td th:text="${customer.getAddress().getCity()}"></td>
+
+
+        <td>
+            <a class="btn btn-danger">Edit</a>&nbsp;
+            <a class="btn btn-danger" >Delete</a>
+
+        </td>
+    </tr>
+
+    </tbody>
+</table>
+
+
+<a class="btn btn-primary" th:href="@{/add}">Add New</a>
+<div th:replace="/admin/shared::footer"></div>
+
+</body>
+</html>
