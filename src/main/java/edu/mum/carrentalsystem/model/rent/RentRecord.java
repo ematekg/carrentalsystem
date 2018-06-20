@@ -20,16 +20,21 @@ public class RentRecord {
     private Customer customer;
     private LocalDate rentDate;
     private LocalDate returnDate;
-    private Double rentFee;
-    private  boolean paymentStatus;
+    private double fee;
+    @ManyToOne
+    @JoinColumn(name = "promo_id")
+    private Promo promo;
+    private double latefee;
+    private double totalfee;
 
-    public RentRecord(Vehicle vehicle, Customer customer, LocalDate rentDate, LocalDate returnDate, Double rentFee, boolean paymentStatus) {
+
+    public RentRecord(Vehicle vehicle, Customer customer, LocalDate rentDate, LocalDate returnDate, double fee) {
         this.vehicle = vehicle;
         this.customer = customer;
         this.rentDate = rentDate;
         this.returnDate = returnDate;
-        this.rentFee = rentFee;
-        this.paymentStatus = paymentStatus;
+        this.fee = fee;
+
     }
 
     public RentRecord() {
@@ -75,19 +80,35 @@ public class RentRecord {
         this.returnDate = returnDate;
     }
 
-    public Double getRentFee() {
-        return rentFee;
+    public double getFee() {
+        return fee;
     }
 
-    public void setRentFee(Double rentFee) {
-        this.rentFee = rentFee;
+    public void setFee(double fee) {
+        this.fee = fee;
     }
 
-    public boolean isPaymentStatus() {
-        return paymentStatus;
+    public Promo getPromo() {
+        return promo;
     }
 
-    public void setPaymentStatus(boolean paymentStatus) {
-        this.paymentStatus = paymentStatus;
+    public void setPromo(Promo promo) {
+        this.promo = promo;
+    }
+
+    public double getLatefee() {
+        return latefee;
+    }
+
+    public void setLatefee(double latefee) {
+        this.latefee = latefee;
+    }
+
+    public double getTotalfee() {
+        return totalfee;
+    }
+
+    public void setTotalfee(double totalfee) {
+        this.totalfee = totalfee;
     }
 }

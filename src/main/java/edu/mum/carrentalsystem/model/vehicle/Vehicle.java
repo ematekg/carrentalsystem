@@ -28,15 +28,17 @@ public class Vehicle {
     @JoinColumn(name = "category_id")
     private VehicleCategory category;
     private String description;
+    private double rentFee;
 
 
 
-    public Vehicle(String model, String make, String year,String url, String description) {
+    public Vehicle(String model, String make, String year,String url, String description, Double rentFee) {
         this.model = model;
         this.make = make;
         this.year = year;
          this.description = description;
         this.url=url;
+        this.rentFee=rentFee;
     }
 
     public Vehicle() {
@@ -105,5 +107,13 @@ public class Vehicle {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public void setRentFee(Double rentFee) {
+        this.rentFee = rentFee;
+    }
+
+    public Double getRentFee() {
+        return rentFee;
     }
 }

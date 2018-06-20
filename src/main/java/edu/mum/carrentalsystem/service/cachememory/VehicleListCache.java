@@ -22,10 +22,11 @@ public class VehicleListCache {
             String make = "Toyota";
             String year = "1999";
             String url = "toyotacamry";
+            double rentfee=20.0;
             String description = "bla bla bla bla bla BlaBlaCar is an online marketplace for carpooling. " +
                     "Its website and mobile apps connect drivers and p" +
                     "assengers willing to travel together between cities and share the cost of the journey";
-            vehicleMap.put(i, new Vehicle(model,make, year, url, description));
+            vehicleMap.put(i, new Vehicle(model,make, year, url, description,rentfee));
         }
     }
 

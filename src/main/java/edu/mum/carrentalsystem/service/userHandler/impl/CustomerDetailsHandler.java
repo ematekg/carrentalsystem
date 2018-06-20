@@ -33,7 +33,7 @@ public class CustomerDetailsHandler  implements ICustomerDetailsHandler {
     }
 
     @Override
-    public Customer findOne(long id) {
+    public Customer  findOne(long id) {
         return userRepository.getOne(id);
     }
 }
