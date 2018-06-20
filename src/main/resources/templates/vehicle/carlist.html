@@ -37,17 +37,19 @@
                         </a>
                     </div>
                     <div class="col-md-5">
-                        <h3>Car Name</h3>
-                        <p>Car description, consectetur adipisicing elit.unde repudiandae voluptatum sit ab debitis
+                        <h3 th:text="${vehicle.getModel()}">Car Name</h3>
+                        <p th:text="${vehicle.getDescription()}">Car description, consectetur adipisicing elit.unde repudiandae voluptatum sit ab debitis
                             suscipit fugiat
                             natus velit excepturi amet commodi deleniti
                             alias possimus!</p>
                         <ul class="list-group">
-                            <li class="list-group-item">Make</li>
-                            <li class="list-group-item">Model</li>
-                            <li class="list-group-item">year</li>
+                            <li class="list-group-item" th:text="'Make ' + ${vehicle.getMake()}">Make</li>
+                            <li class="list-group-item" th:text="'Model ' + ${vehicle.getModel()}">Model</li>
+                            <li class="list-group-item" th:text="'Year ' + ${vehicle.getYear()}">year</li>
                         </ul>
-                        <a class="btn btn-primary" href="/rent/checkout">View Project</a>
+
+                        <a class="btn btn-primary" th:href="@{'/rent/checkout/' + ${vehicle.getId()}}">Find Out More!</a>
+
                     </div>
                 </div>
             </tbody>

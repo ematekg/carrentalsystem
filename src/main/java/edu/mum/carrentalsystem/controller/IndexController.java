@@ -7,8 +7,10 @@ import edu.mum.carrentalsystem.service.rentHandler.CategoryHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -29,8 +31,9 @@ public class IndexController {
 
     @RequestMapping(value = "/category", method = RequestMethod.GET)
     public String catagory(Model model) {
-        List<VehicleCategory> vehicleCategoryList = cache.getAllCategory();
-        model.addAttribute("vehicleCategory", vehicleCategoryList);
+        List<VehicleCategory> vehicleCategoryList = categoryHandler.getAllVehicleCategories();
+        model.addAttribute( "vehicleCategory",vehicleCategoryList);
+        System.err.println("testing if this is working");
         return "vehicle/category";
     }
 
@@ -42,12 +45,13 @@ public class IndexController {
     }
 
 
-    @RequestMapping(value = "/carlist/{vehicleCategory}", method = RequestMethod.GET)
-    public String viewCarsOnCategory(VehicleCategory vehicleCategory, Model model) {
-        List<Vehicle> vehicleList = categoryHandler.getVehiclesByCategory(vehicleCategory);
-        System.out.println(vehicleList);
-        model.addAttribute("vehiclelist", vehicleList);
-        return "vehicle/carlist";
+    @RequestMapping(value = "/catcarlist/{id}", method = RequestMethod.GET)
+    public ModelAndView viewCarsOnCategory(@PathVariable long id) {
+        List<Vehicle> vehicleList = categoryHandler.getVehiclesByCategory(id);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("allvehicles", vehicleList);
+        modelAndView.setViewName("vehicle/carlist");
+        return modelAndView;
     }
 
 }

@@ -19,27 +19,28 @@
 
 
     <!-- Page Features -->
-    <th:block>
-        <table class="table table-striped">
-            <tbody>
-            <tr th:each="vehicleCat : ${vehicleCategory}">
-            <div class="col-lg-3 col-md-6 mb-4">
-                <div class="card">
-                    <img class="card-img-top"
-                         src="https://media.kasperskycontenthub.com/wp-content/uploads/sites/31/2015/03/07004813/uber_logins-280x150.jpg"
-                         alt="">
-                    <div class="card-body">
-                        <h4 class="card-title " th:text="${vehicleCat.getName()}" ></h4>
-                        <p class="card-text" th:text="${vehicleCat.getDescription()}"></p>
+
+        <th:block>
+            <table class="table table-striped">
+                <tbody>
+                <tr th:each="vehicleCat : ${vehicleCategory}">
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <div class="card">
+                            <img class="card-img-top"
+                                 src="https://media.kasperskycontenthub.com/wp-content/uploads/sites/31/2015/03/07004813/uber_logins-280x150.jpg"
+                                 alt="">
+                            <div class="card-body">
+                                <h4 class="card-title " th:text="${vehicleCat.getName()}"></h4>
+                                <p class="card-text" th:text="${vehicleCat.getDescription()}"></p>
+                            </div>
+                            <div class="card-footer">
+                                <a th:href="@{'/catcarlist/' + ${vehicleCat.getId()}}" class="btn btn-primary">Find Out More!</a>
+                            </div>
+                        </div>
                     </div>
-                    <div class="card-footer">
-                        <a th:href="@{'/carlist' + ${vehicleCat}}" class="btn btn-primary">Find Out More!</a>
-                    </div>
-                </div>
-            </div>
-            </tbody>
-        </table>
-    </th:block>
+                </tbody>
+            </table>
+        </th:block>
 
     <!-- /.row -->
 

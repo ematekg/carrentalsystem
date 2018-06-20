@@ -22,12 +22,6 @@ public class Customer extends User {
         this.email = email;
         this.paymentInfo = paymentInfo;
     }
-
-    public Customer(String fullName,  String email) {
-        super(fullName,null);
-        this.email = email;
-    }
-
     public Customer() {
     }
 
