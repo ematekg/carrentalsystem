@@ -10,22 +10,25 @@ public class Vehicle {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    @NotNull
-    @Min(value = 1,message = "please enter a valid model")
+
+//    @NotNull
+//    @Min(value = 4,message = "please enter a valid model")
     private String model;
-    @NotNull
-    @Min(value = 1,message = "please enter a valid Make")
+//    @NotNull
+//    @Min(value = 1,message = "please enter a valid Make")
     private String make;
     @NotNull
     @Min(value = 4,message = "please enter a valid Manufacture Year")
     private String year;
-    @NotNull
-    @Min(value = 3,message = "please enter a valid url")
+//    @NotNull
+//    @Min(value = 1,message = "please enter a valid url")
     private String url;
+    private boolean available=true;
     @ManyToOne
     @JoinColumn(name = "category_id")
     private VehicleCategory category;
     private String description;
+
 
 
     public Vehicle(String model, String make, String year,String url, String description) {
@@ -37,6 +40,14 @@ public class Vehicle {
     }
 
     public Vehicle() {
+    }
+
+    public boolean isAvailable() {
+        return available;
+    }
+
+    public void setAvailable(boolean available) {
+        this.available = available;
     }
 
     public long getId() {
@@ -85,6 +96,7 @@ public class Vehicle {
 
     public void setCategory(VehicleCategory category) {
         this.category = category;
+        category.addVehicle(this);
     }
 
     public String getDescription() {

@@ -3,12 +3,15 @@ package edu.mum.carrentalsystem.controller;
 import edu.mum.carrentalsystem.model.user.*;
 import edu.mum.carrentalsystem.model.vehicle.Vehicle;
 
+import edu.mum.carrentalsystem.model.vehicle.VehicleCategory;
+import edu.mum.carrentalsystem.service.vehicleHandler.IVehicleCategoryHandler;
 import edu.mum.carrentalsystem.service.vehicleHandler.IVehicleDetailHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import javax.annotation.PostConstruct;
@@ -21,6 +24,9 @@ public class ReturnController {
 
    @Autowired
     private IVehicleDetailHandler vehicleDetailHandler;
+   @Autowired
+    private IVehicleCategoryHandler vehicleCategoryHandler;
+
      private User user;
 
     @PostConstruct
@@ -67,25 +73,37 @@ public class ReturnController {
         return "admin/vehicleList";
     }
 
-    @RequestMapping("/add")
-    public String addVehicle(Model model){
-        model.addAttribute("vehicle",new Vehicle());
-       // model.addAttribute("category",new VehicleCatagory("SUV","4 Doors"));
+    @RequestMapping("/listcategory")
+    public String vehicleCategoryList(Model model){
+
+        model.addAttribute("vehicle_cat",vehicleCategoryHandler.findAll());
+
+        return "admin/vehicleCategoryList";
+    }
+
+
+    @RequestMapping("/addvehicle/{id}")
+    public String addVehicle(Model model, @PathVariable long id){
+        Vehicle vehicle=new Vehicle();
+        vehicle.setCategory(vehicleCategoryHandler.findOne(id));
+        model.addAttribute("vehicle",vehicle);
+
         return "admin/addVehicle";
 
     }
 
-    @RequestMapping(value = "/add",method = RequestMethod.POST)
-    public String createVehicle(@Valid @ModelAttribute("vehicle") Vehicle vehicle
+    @RequestMapping(value = "/add",method = RequestMethod.POST )
+    public String createVehicle(@ModelAttribute("vehicle") Vehicle vehicle
             , BindingResult result,Model model){
-        if(result.hasErrors()){
-
-            model.addAttribute("errors",result.getAllErrors());
-
-            return "redirect:/add";
-
-        }
-       // vehicle.setCategory(cat);
+//        if(result.hasErrors()){
+//
+//            model.addAttribute("errors",result.getAllErrors());
+//            //long id=vehicle.getCategory().getId();
+//
+//            return "redirect:/addvehicle/1";
+//
+//        }
+     //   System.out.println(vehicle.getCategory().getName());
         vehicleDetailHandler.save(vehicle);
 
 
@@ -93,4 +111,104 @@ public class ReturnController {
 
 
     }
+
+    @RequestMapping(value = "/edit/{id}",method = RequestMethod.GET )
+    public String editVehicle(@PathVariable long id,Model model){
+
+      model.addAttribute("vehicle",vehicleDetailHandler.findOne(id));
+
+
+        return "admin/editVehicle";
+
+
+    }
+
+    @RequestMapping(value = "/edit",method = RequestMethod.POST)
+    public String updateVehicle(@ModelAttribute("vehicle") Vehicle vehicle){
+
+        vehicleDetailHandler.save(vehicle);
+        return "redirect:/list";
+
+
+    }
+
+    @RequestMapping(value = "/delete/{id}",method = RequestMethod.GET )
+    public String deleteVehicle(@PathVariable long id){
+
+      vehicleDetailHandler.deleteById(id);
+
+
+        return "redirect:/list";
+
+
+    }
+
+
+
+    @RequestMapping(value = "/editcategory/{id}",method = RequestMethod.GET )
+    public String editVehicleCategory(@PathVariable long id,Model model){
+
+        model.addAttribute("vehicle_cat",vehicleCategoryHandler.findOne(id));
+
+
+        return "admin/editVehicleCategory";
+
+
+    }
+
+    @RequestMapping(value = "/editcategory",method = RequestMethod.POST)
+    public String updateVehicleCategory(@ModelAttribute("vehicle_cat")VehicleCategory vehicleCategory){
+
+        vehicleCategoryHandler.save(vehicleCategory);
+        return "redirect:/listcategory";
+
+
+    }
+
+    @RequestMapping(value = "/deletecategory/{id}",method = RequestMethod.GET )
+    public String deleteVehicleCategory(@PathVariable long id){
+        VehicleCategory cat=vehicleCategoryHandler.findOne(id);
+        if(cat.getVehicleList().size()>0){
+
+            return "redirect:/listcategory";
+
+
+        }
+
+        vehicleCategoryHandler.deleteById(id);
+
+
+        return "redirect:/listcategory";
+
+
+    }
+
+
+    @RequestMapping("/addcategory")
+    public String addVehicleCategory(Model model){
+        model.addAttribute("vehicle_cat",new VehicleCategory());
+        return "admin/addVehicleCategory";
+
+    }
+
+
+    @RequestMapping(value = "/addcategory",method = RequestMethod.POST)
+    public String createVehicleCategory(@Valid @ModelAttribute("vehiclecat") VehicleCategory  vehiclecat
+            , BindingResult result,Model model){
+        if(result.hasErrors()){
+
+            model.addAttribute("errors",result.getAllErrors());
+
+            return "redirect:/addcategory";
+
+        }
+
+       vehicleCategoryHandler.save(vehiclecat);
+
+
+        return "redirect:/listcategory";
+
+
+    }
+
 }

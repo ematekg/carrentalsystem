@@ -24,13 +24,7 @@ public class VehicleCategory {
     public VehicleCategory() {
     }
 
-    public String getCatImgUrl() {
-        return catImg_url;
-    }
 
-    public void setCatImgUrl(String catImg_url) {
-        this.catImg_url = catImg_url;
-    }
 
     public String getName() {
         return name;
@@ -57,6 +51,22 @@ public class VehicleCategory {
     }
     public void addVehicle(Vehicle vehcile) {
         this.vehicleList.add(vehcile);
-        vehcile.setCategory(this);
+
+    }
+
+    public void setCatImg_url(String catImg_url) {
+        this.catImg_url = catImg_url;
+    }
+
+    public String getCatImg_url() {
+        return catImg_url;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public long getId() {
+        return id;
     }
 }
