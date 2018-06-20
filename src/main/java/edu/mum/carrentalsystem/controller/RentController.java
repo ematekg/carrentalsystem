@@ -13,9 +13,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
-
-import javax.servlet.http.HttpServletRequest;
 
 @Controller
 @RequestMapping("/rent")
@@ -29,11 +26,9 @@ public class RentController {
     PaymentRecordHandler paymentRecordHandler;
 
     @RequestMapping(value = "/checkout/{id}", method = RequestMethod.GET)
-    public ModelAndView checkout(@PathVariable long id){
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject( vehicleDetailHandler.findOne(id));
-        modelAndView.setViewName("/rent/customerInfo");
-        return modelAndView;
+    public String checkout(@PathVariable long id){
+        paymentRecordHandler.selectVehicle(id);
+        return "/rent/customerInfo";
     }
 
     @RequestMapping(value = "/submit", method = RequestMethod.GET)
@@ -52,13 +47,14 @@ public class RentController {
     @RequestMapping(value = "/payment", method = RequestMethod.GET)
     public String submitpaymentForm(@ModelAttribute("payment") PaymentInfo paymentInfo, Model model){
         paymentRecordHandler.setCustomerPaymentInfo(paymentInfo);
+
         return "rent/successfulmessage";
     }
 
     @RequestMapping(value = "/payment", method = RequestMethod.POST)
     public String savePayment(@ModelAttribute("payment") PaymentInfo paymentInfo, Model model){
-
         paymentRecordHandler.setCustomerPaymentInfo(paymentInfo);
+
 
         return "rent/successfulmessage";
     }
