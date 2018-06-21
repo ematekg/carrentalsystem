@@ -60,7 +60,7 @@ public class ReturnController {
         credential.setRole(Role.ADMIN);
         Credential credInDb=((Admin)user).getCredential();
         if(credInDb.equals(credential)){
-            return "redirect:/welcome";
+            return "redirect:/list";
         }
         return "admin/login";
     }

@@ -27,6 +27,8 @@ public class RentRecord {
     private double latefee;
     private double totalfee;
 
+    private boolean paid;
+
 
     public RentRecord(Vehicle vehicle, Customer customer, LocalDate rentDate, LocalDate returnDate, double fee) {
         this.vehicle = vehicle;
@@ -110,5 +112,13 @@ public class RentRecord {
 
     public void setTotalfee(double totalfee) {
         this.totalfee = totalfee;
+    }
+
+    public boolean isPaid() {
+        return paid;
+    }
+
+    public void setPaid(boolean paid) {
+        this.paid = paid;
     }
 }

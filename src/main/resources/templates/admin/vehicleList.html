@@ -16,8 +16,9 @@
         <th scope="col">Year Made</th>
         <th scope="col">Type</th>
         <th scope="col">Available?</th>
-        <th scope="col">Url</th>
-        <th scope="col">Description</th>
+        <th scope="col">Rent Fee</th>
+
+
     </tr>
     </thead>
     <tbody>
@@ -29,8 +30,9 @@
         <td th:text="${vehcile.getYear()}"></td>
         <td th:text="${vehcile.getCategory().getName()}"></td>
         <td th:text="${vehcile.isAvailable()} ? 'Yes' : 'No'" ></td>
-        <td th:text="${vehcile.getUrl()}"></td>
-        <td th:text="${vehcile.getDescription()}"></td>
+        <td th:text="${vehcile.getRentFee()}"></td>
+
+
         <td>
             <a class="btn btn-danger" th:href="@{'/edit/' + ${vehcile.getId()}}">Edit</a>&nbsp;
             <a class="btn btn-danger" th:href="@{'/delete/' + ${vehcile.getId()}}">Delete</a>
@@ -42,8 +44,9 @@
 </table>
 
 
-<a class="btn btn-primary" th:href="@{/add}">Add New</a>
-<div th:replace="/admin/shared::footer"></div>
+<!--<a class="btn btn-primary" th:href="@{/add}">Add New</a>-->
+
 
 </body>
+<div th:replace="/admin/shared::footer"></div>
 </html>

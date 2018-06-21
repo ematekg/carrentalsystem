@@ -34,7 +34,7 @@
         <div class="col-md-4 order-md-2 mb-4">
             <h4 class="d-flex justify-content-between align-items-center mb-3">
                 <span class="text-muted">Cart</span>
-                <span class="badge badge-secondary badge-pill"><label th:text="${customer.getRentrecord().size()}"></label></span>
+                <span class="badge badge-secondary badge-pill"><label th:text="${rentrecord.getCustomer().getRentrecord().size()}"></label></span>
             </h4>
             <ul class="list-group mb-3">
                 <li class="list-group-item d-flex justify-content-between lh-condensed">
@@ -44,7 +44,7 @@
                         <label th:text="${rentrecord.getVehicle().getCategory().getName()}"></label>
                         </small>
                     </div>
-                    <span class="text-muted">$12</span>
+
                 </li>
                 <li class="list-group-item d-flex justify-content-between lh-condensed">
                     <div>
@@ -53,31 +53,42 @@
                             <label th:text="${rentrecord.getVehicle().getMake()+ ' ' + rentrecord.getVehicle().getModel()}"></label>
                         </small>
                     </div>
-                    <span class="text-muted">$8</span>
+
                 </li>
                 <li class="list-group-item d-flex justify-content-between lh-condensed">
                     <div>
-                        <h6 class="my-0">Third item</h6>
-                        <small class="text-muted">Brief description</small>
+                        <h6 class="my-0">Rental Fee</h6>
+                        <small class="text-muted">
+                            <label th:text="${rentrecord.getRentDate()+ ' ' +'to'+' '+ rentrecord.getReturnDate()}"></label>
+                        </small>
                     </div>
-                    <span class="text-muted">$5</span>
+                    <span class="text-muted">$ <label th:text="${rentrecord.getFee()}"></label></span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <div class="text-danger">
+                    <span> Late Fee(USD)</span>
+                    </div>
+                    <span class="text-danger">+$ <label name='latefee' th:text="${rentrecord.getLatefee()}"></label></span>
                 </li>
                 <li class="list-group-item d-flex justify-content-between bg-light">
                     <div class="text-success">
                         <h6 class="my-0">Promo code</h6>
-                        <small>EXAMPLECODE</small>
+                        <small><label
+                                th:text="${rentrecord.getPromo() != null} ? ${rentrecord.getPromo().getCode()} : 'promo code?'" ></label></small>
                     </div>
-                    <span class="text-success">-$5</span>
+                    <span class="text-success">-$<label th:text="${rentrecord.getPromo() != null} ? ${rentrecord.getPromo().getValue()} : '0.0'"></label></span>
                 </li>
                 <li class="list-group-item d-flex justify-content-between">
                     <span>Total (USD)</span>
-                    <strong>$20</strong>
+                    <strong><label th:text="${rentrecord.getTotalfee()+ rentrecord.getLatefee()- (rentrecord.getPromo() != null? rentrecord.getPromo().getValue() :0.0)}"></label></strong>
                 </li>
             </ul>
 
-            <form class="card p-2">
+            <form class="card p-2"  name="promocode" method="POST" th:action="@{/promocode}" >
+                <input type="hidden"   name='custid' th:value="${rentrecord.getCustomer().getUserId()}" />
+
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Promo code">
+                    <input type="text" class="form-control"  name='code' placeholder="Promo code">
                     <div class="input-group-append">
                         <button type="submit" class="btn btn-secondary">Redeem</button>
                     </div>
@@ -86,11 +97,27 @@
         </div>
         <div class="col-md-8 order-md-1">
             <h4 class="mb-3">Billing address</h4>
-            <form class="needs-validation" novalidate   method="POST" th:action="@{/return}"  th:object="${customer}">
+            <form class="needs-validation" novalidate   method="POST" th:action="@{/checkout}">
+                <input type="hidden"   name='customerid' th:value="${rentrecord.getCustomer().getUserId()}" />
+                <input type="hidden"   name='latefee' th:value="${rentrecord.getLatefee()}" />
+                <div th:with="total=${rentrecord.getTotalfee()+ rentrecord.getLatefee()- (rentrecord.getPromo() != null? rentrecord.getPromo().getValue() :0.0)}">
+
+                           <input type="hidden"   name='totalfee' th:value="${total}"/>
+                </div>
+                <div th:with=" code=${rentrecord.getPromo() != null? rentrecord.getPromo().getCode() : ''}">
+
+                    <input type="hidden"   name='promocode' th:value="${code}"/>
+                </div>
+                <div th:with=" value=${rentrecord.getPromo() != null? rentrecord.getPromo().getValue():0}">
+
+                    <input type="hidden"   name='promovalue' th:value="${value}"/>
+                </div>
+
+
 
                 <div class="mb-3">
                     <label for="address">Full Name</label>
-                    <input type="text" class="form-control" id="fullname" th:field="*{fullName}" required>
+                    <input type="text" class="form-control" id="fullname" th:value="${rentrecord.getCustomer().getFullName()}" required>
                     <div class="invalid-feedback">
                         Please enter your Full Name.
                     </div>
@@ -102,7 +129,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">@</span>
                         </div>
-                        <input type="text" class="form-control" id="email" placeholder="email" th:field="*{email}" required>
+                        <input type="text" class="form-control" id="email" placeholder="email" th:value="${rentrecord.getCustomer().getEmail()}" required>
                         <div class="invalid-feedback" style="width: 100%;">
                             Your Email is required.
                         </div>
@@ -113,7 +140,7 @@
 
                 <div class="mb-3">
                     <label for="address">Address</label>
-                    <input type="text" class="form-control" id="address" placeholder="1234 Main St" th:value="${customer.getAddress().getStreet()}" required>
+                    <input type="text" class="form-control" id="address" placeholder="1234 Main St" th:value="${rentrecord.getCustomer().getAddress().getStreet()}"  required>
                     <div class="invalid-feedback">
                         Please enter your shipping address.
                     </div>
@@ -123,21 +150,21 @@
                 <div class="row">
                     <div class="col-md-4 mb-3">
                         <label for="zip">State</label>
-                        <input type="text" class="form-control" id="state" placeholder="" th:value="${customer.getAddress().getState()}" required>
+                        <input type="text" class="form-control" id="state" placeholder="" th:value="${rentrecord.getCustomer().getAddress().getState()}" required>
                         <div class="invalid-feedback">
                             State code required.
                         </div>
                     </div>
                     <div class="col-md-4 mb-3">
                         <label for="zip">City</label>
-                        <input type="text" class="form-control" id="city" placeholder="" th:value="${customer.getAddress().getCity()}" required>
+                        <input type="text" class="form-control" id="city" placeholder="" th:value="${rentrecord.getCustomer().getAddress().getCity()}" required>
                         <div class="invalid-feedback">
                            City required.
                         </div>
                     </div>
                     <div class="col-md-4 mb-3">
                         <label for="zip">Zip</label>
-                        <input type="text" class="form-control" id="zip" placeholder="" th:value="${customer.getAddress().getZipCode()}" required>
+                        <input type="text" class="form-control" id="zip" placeholder="" th:value="${rentrecord.getCustomer().getAddress().getZipCode()}" required>
                         <div class="invalid-feedback">
                             Zip code required.
                         </div>
@@ -155,7 +182,7 @@
 
                     <div class="col-md-6 mb-3">
                         <label for="cc-number">Credit card number</label>
-                        <input type="text" class="form-control" id="cc-number" placeholder="" th:value="${customer.getPaymentInfo().getCardNumber()}" required>
+                        <input type="password" class="form-control" id="cc-number" placeholder="" th:value="${rentrecord.getCustomer().getPaymentInfo().getCardNumber()}" required>
                         <div class="invalid-feedback">
                             Credit card number is required
                         </div>
@@ -164,14 +191,14 @@
                 <div class="row">
                     <div class="col-md-3 mb-3">
                         <label for="cc-expiration">Expiration</label>
-                        <input type="text" class="form-control" id="cc-expiration" placeholder="" th:value="${customer.getPaymentInfo().getExpireDate()}"required>
+                        <input type="text" class="form-control" id="cc-expiration" placeholder="" th:value="${rentrecord.getCustomer().getPaymentInfo().getExpireDate()}" required>
                         <div class="invalid-feedback">
                             Expiration date required
                         </div>
                     </div>
                     <div class="col-md-3 mb-3">
                         <label for="cc-expiration">CVV</label>
-                        <input type="text" class="form-control" id="cc-cvv" placeholder="" th:value="${customer.getPaymentInfo().getCvv()}" required>
+                        <input type="text" class="form-control" id="cc-cvv" placeholder="" th:value="${rentrecord.getCustomer().getPaymentInfo().getCvv()}" required>
                         <div class="invalid-feedback">
                             Security code required
                         </div>
@@ -183,7 +210,7 @@
         </div>
     </div>
     <footer class="my-5 pt-5 text-muted text-center text-small">
-        <p class="mb-1">&copy; 2017-2018 Group2</p>
+        <p class="mb-1">&copy; 2018 Group2</p>
 
     </footer>
 </div>

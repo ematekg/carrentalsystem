@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head th:replace="home :: head">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="../static/css/car_list.css" rel="stylesheet">
+
+</head>
+<head>
+    <style>
+        div.gallery {
+            margin: 5px;
+            border: 1px solid #ccc;
+            float: left;
+            width: 180px;
+        }
+
+        div.gallery:hover {
+            border: 1px solid #777;
+        }
+
+        div.gallery img {
+            width: 100%;
+            height: auto;
+        }
+
+        div.desc {
+            padding: 15px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+<nav th:replace="home :: navbar"></nav>
+
+<div class="container-fluid text-center">
+    <div class="row content">
+
+        <div class="col-sm-8 text-left">
+            <h1>About Us</h1>
+            <hr>
+        </div>
+    </div>
+</div>
+<br/>
+
+<p align="left">
+    You have a destination. Our mission at LME Car Rental is to help you get there – quickly, efficiently and pleasantly.
+</p>
+<p align="left">
+    Wherever you’re going, we’re there – and we have a car for you: A new or next-to-new vehicle that’s ready when you are. No excuses, no surprises.
+</p>
+<p align="left">
+    LME Car Rental is a privately owned companyy and is one of the the best car rental companies in Fairfield, Iowa with a buisness exprience of over 10 years.
+</p>
+<p align="left">
+    We cater to business and leisure travelers with convenient location for pick right at the heart of Fairfeild, Iowa. We’re proud to deliver superior service, choice and value for you – our customers.
+</p>
+<p align="left">
+    We are the GPS of your business trip, the vroom of your vacation.
+
+</p>
+
+<h2 class="page-heading">Software Development Team</h2>
+<p>&nbsp;</p>
+<!-- <div class="services-wrapper services-boxed-photo cols-wrapper cols-4" id="section-2"><div class="services-box col"><div class="img-container"><img src="melat.png" srcset="melat.png 2x" alt="Melat Hadgu"/></div><div class="services-content"><div class="sc-wraper"><h3>Melat Hadgu</h3><p>Founder</p></div></div></div>
+
+<div class="services-box col"><div class="img-container"><img src="livan.png" srcset="livan.png 2x" alt="Livan Haddish"/></div><div class="services-content"><div class="sc-wraper"><h3>Livan Haddish</h3><p>Assistant Manager</p></div></div></div>
+
+<div class="services-wrapper services-boxed-photo cols-wrapper cols-4" id="section-2"><div class="services-box col"><div class="img-container"><img src="amanuel.png" srcset="amanuel.png 2x" alt="Amanuel Goitom"/></div><div class="services-content"><div class="sc-wraper"><h3>Amanuel Goitom</h3><p>Founder</p></div></div></div>
+
+
+<div class="services-wrapper services-boxed-photo cols-wrapper cols-4" id="section-2"><div class="services-box col"><div class="img-container"><img src="merih.png" srcset="merih.png 2x" alt="Merih Tadese"/></div><div class="services-content"><div class="sc-wraper"><h3>Merih Tadese</h3><p>Lead Engineer</p></div></div></div>
+ -->
+<div class="gallery">
+    <!--<img src="../../static/images/team/melat.jpg">-->
+    <img src="/images/team/melat.jpg">
+
+    <div class="desc">Software Engineer</div>
+</div>
+
+<div class="gallery">
+    <img src="/images/team/livan.jpg" alt="livan" width="300" height="200">
+
+    <div class="desc">Software Engineer</div>
+</div>
+
+<div class="gallery">
+    <img src="/images/team/amanuel.jpg" alt="amanuel" width="300" height="200">
+
+    <div class="desc">Software Engineer</div>
+</div>
+
+<div class="gallery">
+    <img src="/images/team/merih.jpg" alt="merih" width="300" height="200">
+
+    <div class="desc">Software Engineer</div>
+</div>
+<br><br><br><br><br><br><br><br><br><br><br><br>
+
+<footer th:replace=" home :: footer"></footer>
+
+</body>
+
+</html>
+

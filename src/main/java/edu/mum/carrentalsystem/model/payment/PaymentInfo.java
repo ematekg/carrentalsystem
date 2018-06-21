@@ -1,5 +1,7 @@
 package edu.mum.carrentalsystem.model.payment;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,6 +14,7 @@ public class PaymentInfo {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String  cardNumber;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate expireDate;
     private int cvv;
 

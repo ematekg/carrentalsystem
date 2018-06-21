@@ -6,25 +6,25 @@ import edu.mum.carrentalsystem.service.PaymentInfoValidatorStrategy.strategy.Car
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+
 @Service
-public class VisaStrategy implements CardcheckStrategies {
+public class GeneralCardVerification implements CardcheckStrategies {
+
     @Autowired
     private IPaymentInfoValidator paymentInfoValidator;
-
-
     public boolean isValid(PaymentInfo paymentInfo) {
-        boolean isValid = true;
 
-        isValid = paymentInfo.getCardNumber().startsWith("4");
-
-        if(isValid) {
-            isValid = paymentInfo.getCardNumber().length() == 16;
+        LocalDate expireDate = paymentInfo.getExpireDate();
+        if(expireDate.isBefore(LocalDate.now())){
+            return false;
         }
 
-        if(isValid) {
-            isValid = paymentInfoValidator.passesLuhn(paymentInfo);
-        }
+        return paymentInfoValidator.passesLuhn(paymentInfo);
 
-        return isValid;
+    }
+
+    public void setPaymentInfoValidator(IPaymentInfoValidator paymentInfoValidator) {
+        this.paymentInfoValidator = paymentInfoValidator;
     }
 }

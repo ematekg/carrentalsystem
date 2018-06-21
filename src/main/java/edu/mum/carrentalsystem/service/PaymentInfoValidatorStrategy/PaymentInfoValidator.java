@@ -1,13 +1,15 @@
 package edu.mum.carrentalsystem.service.PaymentInfoValidatorStrategy;
 
+import edu.mum.carrentalsystem.model.payment.PaymentInfo;
 import edu.mum.carrentalsystem.service.IPaymentInfoValidator;
 import org.springframework.stereotype.Service;
 
 
 @Service
-public abstract class APaymentInfoValidator implements IPaymentInfoValidator {
+public  class PaymentInfoValidator implements IPaymentInfoValidator {
 
-    protected boolean passesLuhn(String ccNumber) {
+    public boolean passesLuhn(PaymentInfo paymentInfo) {
+        String ccNumber=paymentInfo.getCardNumber().toString();
         int sum = 0;
         boolean alternate = false;
         for (int i = ccNumber.length() - 1; i >= 0; i--) {

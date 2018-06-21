@@ -49,6 +49,14 @@
         </div>
     </div>
     <div class="form-group row">
+        <label  class="col-sm-2 col-form-label">Rent fee Per Day</label>
+        <label th:if="${#fields.hasErrors('rentFee')}" th:errors="*{rentFee}"
+               class="validation-message"></label>
+        <div class="col-sm-4">
+            <input  type="text" class="form-control"  th:field="*{rentFee}" placeholder="Rental price">
+        </div>
+    </div>
+    <div class="form-group row">
         <label  class="col-sm-2 col-form-label">Url</label>
         <label th:if="${#fields.hasErrors('url')}" th:errors="*{url}"
                class="validation-message"></label>
