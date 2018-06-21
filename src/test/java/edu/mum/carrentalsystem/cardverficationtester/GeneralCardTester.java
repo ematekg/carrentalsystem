@@ -36,7 +36,7 @@ public class GeneralCardTester {
     }
 
     @Test
-    public void reverseArray() {
+    public void cardVerifier() {
         paymentInfo=new PaymentInfo("4567383986",LocalDate.of(2012,05,12),546);
         when(paymentInfoValidator.passesLuhn(paymentInfo)).thenReturn(true);
 
